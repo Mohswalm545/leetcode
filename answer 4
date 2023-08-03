@@ -1,0 +1,26 @@
+class Solution(object):
+    def findLongestChain(self, pairs):
+        def find_error_numbers(nums):
+    n = len(nums)
+    sum_expected = n * (n + 1) // 2
+    sum_actual = sum(nums)
+
+    # Step 2: Compute the missing number
+    missing_number = sum_expected - sum_actual
+
+    # Step 3: Find the duplicated number
+    num_freq = {}
+    duplicated_number = None
+    for num in nums:
+        if num in num_freq:
+            duplicated_number = num
+            break
+        else:
+            num_freq[num] = 1
+
+    # Step 4: Return the result as a list
+    return [duplicated_number, duplicated_number + missing_number]
+
+# Test cases
+print(find_error_numbers([1, 2, 2, 4]))  # Output: [2, 3]
+print(find_error_numbers([1, 1]))       # Output: [1, 2]
